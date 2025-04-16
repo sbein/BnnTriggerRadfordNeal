@@ -1,9 +1,9 @@
-Bayesian Neural Network Example (classification)
+Trigger efficiency with a BNN
 ------------------------------------------------
-Harrison B. Prosper  
+Sam Bein adapated from Harrison Prosper adapted from Radford Neal
 Created: 25-Mar-2014  
 
-*Adapted for a CMS MET/MHT Trigger Efficiency Example*
+This is a repo of a recently re-discovered application for estimating the trigger efficiency with a BNN.  The following is mostly Harrison's original README but edited/prepared with the example of the CMS RUn 2 MET/MHT trigger family (HLT_PFMETX_PFMHTX*_v*). It requires you to prepare a text file (.dat) with rows for the feature vectors for events that pass the given trigger, and another .dat file for events that faile the trigger. The training uses a classificaiton trick to return an ensemble of estimates of the trigger efficiency; the writer then produces a cpp function that returns the median and quantiles of this ensemble, which you can use as an event weight+uncertainty in your analysis. 
 
 Introduction
 ------------
