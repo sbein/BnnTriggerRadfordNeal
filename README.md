@@ -22,9 +22,9 @@ The workflow below is tailored to measuring the efficiency (and associated uncer
 
 Clone this repo and compile Neal's package
     
-    ./make-clean
     git clone https://github.com/sbein/BnnTriggerRadfordNeal
     cd BnnTriggerRadfordNeal/fbm.2004-11-10
+    ./make-clean
     ./make-all
 
 After compilation, ensure the executables (`net-spec`, `net-mc`, `net-display`, etc.) are in your `$PATH`. For example:
