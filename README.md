@@ -10,9 +10,7 @@ The following is mostly Harrison's original README but edited/prepared with the 
 Introduction
 ------------
 The file `doc/BNN.pdf` in this directory provides a terse introduction to the Bayesian Neural Network (BNN) package by Radford Neal.  
-His software can be found (if still available) at:
-
-    http://www.cs.toronto.edu/~radford/software-online.html
+His software can be found at: http://www.cs.toronto.edu/~radford/software-online.html
 
 **Notes on Neal’s Package**  
 1. It was used in key analyses (e.g., first single top evidence in 2006; H→ZZ→4ℓ).  
@@ -23,9 +21,10 @@ His software can be found (if still available) at:
 The workflow below is tailored to measuring the efficiency (and associated uncertainty) of MET-based triggers (e.g., HLT_PFMET100_PFMHT100, etc.) in CMS Run 2 searches for dark matter / SUSY.
 
 Clone this repo and compile Neal's package
+    
+    ./make-clean
     git clone https://github.com/sbein/BnnTriggerRadfordNeal
     cd BnnTriggerRadfordNeal/fbm.2004-11-10
-    ./make-clean
     ./make-all
 
 After compilation, ensure the executables (`net-spec`, `net-mc`, `net-display`, etc.) are in your `$PATH`. For example:
