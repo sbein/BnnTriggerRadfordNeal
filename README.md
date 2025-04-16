@@ -22,22 +22,23 @@ His software can be found (if still available) at:
 
 The workflow below is tailored to measuring the efficiency (and associated uncertainty) of MET-based triggers (e.g., HLT_PFMET100_PFMHT100, etc.) in CMS Run 2 searches for dark matter / SUSY.
 
-To compile the Neal package
----------------------------
-    cd fbm.2004-11-10
+Clone this repo and compile Neal's package
+    git clone https://github.com/sbein/BnnTriggerRadfordNeal
+    cd BnnTriggerRadfordNeal/fbm.2004-11-10
     ./make-clean
     ./make-all
 
 After compilation, ensure the executables (`net-spec`, `net-mc`, `net-display`, etc.) are in your `$PATH`. For example:
 
-    export PATH=/full/path/to/fbm.2004-11-10/bin:$PATH
+    export PATH=$PWD/bin:$PATH
+    cd ../
 
 Setup
 -----
 1. **Edit `setup.sh`** (if it exists) and source it, or manually set the PATH as shown above.  
 
 2. **Data**  
-   Suppose you have two text files containing unweighted events:
+   The input is the text files containing unweighted events:
 
 trigdatafiles/passTrigger_MetMhtSextet.dat trigdatafiles/failTrigger_MetMhtSextet.dat
 
@@ -48,13 +49,6 @@ Each file has columns for the input variables, plus a final column indicating pa
       python bin/unweight.py failWeighted.dat failTrigger_MetMhtSextet.dat 20000
 
 3. **Randomly mix pass & fail, scale variables**  
-The script `mixsigbkg.py` does the following:
-- Reads pass/fail `.dat` files  
-- Merges them into a single training file  
-- Optionally scales each variable to mean=0, std=1  
-- Outputs `<NAME>.dat` and `<NAME>.var`
-
-For a “real MET” example named `MetMhtSextet`, run:
 
     python bin/mixsigbkg.py MetMhtSextet
     
@@ -83,7 +77,7 @@ Launch the sampling by sourcing the generated script in the background:
     source MetMhtSextet.sh &
 
 This runs Neal’s HMC, which saves neural network parameters at each iteration to `MetMhtSextet.bin`.  
-Periodically check progress:
+You can periodically check progress with:
 
     net-display -h MetMhtSextet.bin
 
@@ -110,40 +104,6 @@ For a quick distribution plot or performance check, you can adapt a script such 
  python plotBNN.py MetMhtSextet.bin
 
 This will show how the BNN output separates pass vs. fail events.
-
----
-
-Example Command Flow
---------------------
-Below is a condensed list of commands for the *real MET (MetMhtSextet)* example:
-
-1. **Mix pass/fail data**  
-
-    python bin/mixsigbkg.py MetMhtSextet
-    
-Produces `MetMhtSextet.dat` and `MetMhtSextet.var`.
-
-2. **Create a training shell**  
-
-    python bin/mktrain.py MetMhtSextet
-    
-Produces `MetMhtSextet.sh`.
-
-3. **Run the MCMC**  
-
-    source MetMhtSextet.sh &
-    
-Writes networks to `MetMhtSextet.bin`.
-
-4. **Check chain**  
-
-    net-display -h MetMhtSextet.bin
-
-5. **Write final C++**  
-
-    python bin/netwrite.py -n200 MetMhtSextet.bin
-    
-Produces `MetMhtSextet.cpp`.
 
 Afterwards, you can compile and link `MetMhtSextet.cpp` into your analysis software or just parse the `.bin` directly for posterior predictions.
 
