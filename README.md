@@ -101,7 +101,7 @@ Test
 ----
 For a quick distribution plot or performance check, you can adapt a script such as `plotBNN.py` to read the `.bin` or the `.cpp` function. For instance:
 
- python plotBNN.py MetMhtSextet.bin
+    python plotBNN.py MetMhtSextet.bin
 
 This will show how the BNN output separates pass vs. fail events.
 
