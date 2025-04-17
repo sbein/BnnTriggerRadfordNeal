@@ -1,7 +1,7 @@
 Trigger efficiency with a BNN
 ------------------------------------------------
-Sam Bein adapated from Harrison Prosper adapted from Radford Neal
-Created: 25-Mar-2014  
+Sam Bein adapated (2017 and 2025) from Harrison Prosper (25-Mar-2014) adapted from Radford Neal
+ 
 
 This is a recently re-discovered application for estimating the trigger efficiency with a BNN.   It requires you to prepare a text file (.dat) with rows for the feature vectors for events that pass the given trigger, and another .dat file for events that faile the trigger. The writer produces a cpp function that returns the central value and uncertainty which you can use as a weight/uncertainty in your analysis. 
 
